@@ -16,7 +16,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: 'https://rita-chat-server-d349b20179e4.herokuapp.com/',
+    origin: 'https://hidden-journey-85505-e7783b61ef62.herokuapp.com/',
     methods: ['GET', 'POST'],
   },
 });
