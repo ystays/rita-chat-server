@@ -27,11 +27,6 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
   console.log(`User connected ${socket.id}`);
 
-  socket.on('join_room', (data) => {
-    const { username, room } = data;
-    socket.join(room);
-  });
-
   socket.on('rtc_offer', (rtc_offer) => {
     socket.broadcast.emit('rtc_offer', rtc_offer);
     console.log("offer emitted")
@@ -47,10 +42,8 @@ io.on('connection', (socket) => {
     console.log("new candidate emitted", evt);
   });
 
-
   socket.on('rtc_message', (rtc_message) => {
     socket.broadcast.emit('rtc_message', rtc_message);
-    console.log(rtc_message);
   });
 
   socket.on('close', () => {
@@ -63,15 +56,8 @@ io.on('connection', (socket) => {
 
 })
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/index.html');
-// });
-
-// app.use('/', express.static(path.join(__dirname, '')));
-
 const publicDirectoryPath = path.join(__dirname, './public')
 
 app.use(express.static(publicDirectoryPath))
-
 
 server.listen(port, () => console.log(`Server is running on port ${port}`));
